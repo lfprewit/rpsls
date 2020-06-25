@@ -1,12 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Game from './components/game.js';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+// store setup
+
+const initialState = {
+  choice: null
+}
+
+//if state is undefined, initialState will be used
+function reducer (state = initialState, action) {
+  switch(action.type) {
+    case 'ROCK':
+      return {//this is definitely wrong
+        newState : {
+          ...state,
+          choice: 'Rock'
+        } 
+      }
+    case 'PAPER':
+      return {//this is definitely wrong
+        newState : {
+          ...state,
+          choice: 'Paper'
+        } 
+      }
+    
+    default:
+      return state;
+  }
+}
+
+const store = createStore(reducer);
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+    <Game />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
