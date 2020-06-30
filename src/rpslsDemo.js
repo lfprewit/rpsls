@@ -1,6 +1,6 @@
 
-uChoice = "rock";
-cChoice = "spock";
+let uChoice = "rock";
+let cChoice = "spock";
 
 const choices = ["rock", "paper", "scissors", "lizard", "spock"];
 
@@ -17,6 +17,39 @@ const result = [
 ];
 
 console.log(result[uIndex][cIndex]);
+
+
+
+
+let randomNum = Math.floor(Math.random() * 3);
+let computerChoice = choiceStack[randomNum];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

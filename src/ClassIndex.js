@@ -1,49 +1,51 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Selection from './components/Selection.js';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
+import ClassBoard from './ClassComponents/ClassBoard.js';
+import ClassScore from './ClassComponents/ClassScore.js';
 
-// store setup
+
+// store setup -> VERIFY THIS 
 
 const initialState = {
-  choice: '',
-  name: 'Lance'
-}
+    score: 0,
+    players: [
+      {
+        name: 'Test',
+        class: 'Mage'
+      },
+      {
+        name: 'Test2',
+        class: 'Warrior'
+      }
+    ],
+    inventory: [
+      {
+        count: 100,
+        type: 'potion'
+      }
+    ]
+  }
 
 //if state is undefined, initialState will be used
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case 'ROCK':
-      return {
-          ...state,
-          choice: 'Rock'
-      }
-    case 'PAPER':
-      return {
-          ...state,
-          choice: 'Paper'
-      }
-      case 'SCISSORS':
-    return {
-        ...state,
-        choice: 'Scissors'
-    }
-    case 'LIZARD':
-    return {
-        ...state,
-        choice: 'Lizard'
-    }
-    case 'SPOCK':
-    return {
-        ...state,
-        choice: 'Spock'
-    }
+    case 'YOU_WIN':
+        return {
+            ...state,
+            score: state.score + action.payload.points
+        }
+    case 'YOU_LOSE':
+        return {
+            ...state,
+            score: state.score + action.payload.points
+        }
     default:
-      return state;
+        return state;
   }
 }
 
@@ -53,7 +55,8 @@ const store = createStore(reducer);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Selection />
+        <ClassBoard />
+        <ClassScore />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
