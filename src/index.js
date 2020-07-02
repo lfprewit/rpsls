@@ -2,46 +2,36 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Selection from './components/Selection.js';
+import Game from './components/Game.js';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-
+//import { BrowserRouter as Router} from 'react-router-dom';
 
 // store setup
 
 const initialState = {
+  name: 'Lance',
   choice: '',
-  name: 'Lance'
+  compChoice: '',
+  gameResults: ''
 }
 
 //if state is undefined, initialState will be used
 const reducer = (state = initialState, action) => {
+  let {payload} = action;
   switch(action.type) {
-    case 'ROCK':
+    case 'USER_CHOICE':
       return {
-          ...state,
-          choice: 'Rock'
+        ...state,
+        choice: payload
       }
-    case 'PAPER':
+    case 'EXECUTE_GAME':
       return {
-          ...state,
-          choice: 'Paper'
+        ...state,
+        compChoice: payload.compChoiceText, //action.payload.compChoiceText???
+        gameResults: payload.gameResults
       }
-      case 'SCISSORS':
-    return {
-        ...state,
-        choice: 'Scissors'
-    }
-    case 'LIZARD':
-    return {
-        ...state,
-        choice: 'Lizard'
-    }
-    case 'SPOCK':
-    return {
-        ...state,
-        choice: 'Spock'
-    }
     default:
       return state;
   }
@@ -53,7 +43,9 @@ const store = createStore(reducer);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Selection />
+  
+        <Selection />
+        <Game />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
