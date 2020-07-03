@@ -24,7 +24,9 @@ const reducer = (state = initialState, action) => {
     case 'USER_CHOICE':
       return {
         ...state,
-        choice: payload
+        choice: payload.choice,
+        compChoice: payload.compChoice,
+        gameResults: payload.gameResult
       }
     case 'EXECUTE_GAME':
       return {
