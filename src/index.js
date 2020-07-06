@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Selection from './components/Selection.js';
+import Selection from './components/Selection';
 import Game from './components/Game.js';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import Scoreboard from './components/Scoreboard';
 //import { BrowserRouter as Router} from 'react-router-dom';
 
 // store setup
@@ -14,9 +15,12 @@ const initialState = {
   name: 'Lance',
   choice: '',
   compChoice: '',
-  gameResults: ''
+  gameResults: '',
+  showMyComponent: false,
+  showSomeOtherComponent: false,
+  userScore: 0,
+  compScore: 0
 }
-
 //if state is undefined, initialState will be used
 const reducer = (state = initialState, action) => {
   let {payload} = action;
@@ -34,6 +38,16 @@ const reducer = (state = initialState, action) => {
         compChoice: payload.compChoiceText, //action.payload.compChoiceText???
         gameResults: payload.gameResults
       }
+    case 'SHOW_MY_COMPONENT':
+      return {
+        ...state,
+        showMyComponent: payload.payload//not sure about this
+      }
+    case 'SHOW_SOME_OTHER_COMPONENT':
+      return {
+        ...state, 
+        showSomeOtherComponent: payload.payload
+      }
     default:
       return state;
   }
@@ -42,12 +56,14 @@ const reducer = (state = initialState, action) => {
 const store = createStore(reducer);
 
 
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-  
         <Selection />
         <Game />
+        <Scoreboard />
+        
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

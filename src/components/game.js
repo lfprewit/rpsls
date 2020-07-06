@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
-
-
-
-
 export class Game extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isActive: false
+        };
+    }
 
-
+    
 
     render() {
         return (
             
             <div>
                 <h2>Results</h2>
-                <h3>You chose {this.props.choice}</h3>
-                <h3>Your opponent chose {this.props.compChoice}</h3>
-                <h3>You {this.props.gameResults}</h3>
-
+                <p>You chose {this.props.choice}</p>
+                <p>Your opponent chose {this.props.compChoice}</p>
+                <p>You {this.props.gameResults}</p>
+                
                 
             </div>
         )
     }
 }
-
 
 const mapStateToProps = (state) => {
     return {
@@ -32,12 +33,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        gameTime: (gameData) => {
-            return dispatch ({type: 'EXECUTE_GAME', payload: gameData});
-        }
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps)(Game);
