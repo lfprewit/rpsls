@@ -51,15 +51,11 @@ export class Selection extends Component {
     }
 
     handleShow = ()=>{
-        this.setState({
-            isActive: true
-        })
+        this.props.instructionState({instructionsActive: true});
     }
   
     handleHide = () =>{
-        this.setState({
-            isActive: false
-        })
+        this.props.instructionState({instructionsActive: false});
     }
 
     render() {
@@ -67,7 +63,7 @@ export class Selection extends Component {
             <div>
                 <h1>{this.state.title}</h1>
                 <div>
-                    {this.state.isActive ? <div><h2>Instructions</h2> <Instructions /></div> : <h2>Instructions</h2> }
+                    {this.props.instructionsActive ? <div><h2>Instructions</h2> <Instructions /></div> : <h2>Instructions</h2> }
                         <button onClick={this.handleShow}>Show</button>
                         <button onClick={this.handleHide}>Hide</button>
                 </div>
@@ -98,8 +94,12 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch ({type: 'USER_CHOICE', payload: choice})
         },
         gameTime: (gameData) => {
-            return dispatch ({type: 'EXECUTE_GAME', payload: gameData});
+            return dispatch ({type: 'EXECUTE_GAME', payload: gameData})
+        },
+        instructionState: (stateChange) => {
+            return dispatch ({type: 'INSTRUCTIONS', payload: stateChange})
         }
+
     }
 }
 

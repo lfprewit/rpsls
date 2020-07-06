@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Selection from './components/Selection';
-import Game from './components/Game.js';
+import Game from './components/game.js';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -19,7 +19,8 @@ const initialState = {
   showMyComponent: false,
   showSomeOtherComponent: false,
   userScore: 0,
-  compScore: 0
+  compScore: 0,
+  instructionsActive: false
 }
 //if state is undefined, initialState will be used
 const reducer = (state = initialState, action) => {
@@ -38,15 +39,10 @@ const reducer = (state = initialState, action) => {
         compChoice: payload.compChoiceText, //action.payload.compChoiceText???
         gameResults: payload.gameResults
       }
-    case 'SHOW_MY_COMPONENT':
+    case 'INSTRUCTIONS':
       return {
         ...state,
-        showMyComponent: payload.payload//not sure about this
-      }
-    case 'SHOW_SOME_OTHER_COMPONENT':
-      return {
-        ...state, 
-        showSomeOtherComponent: payload.payload
+        instructionsActive: payload.instructionsActive
       }
     default:
       return state;
