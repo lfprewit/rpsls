@@ -37,17 +37,19 @@ export class Selection extends Component {
             compChoice: compChoiceText,
             gameResult: gameResult
         };
+        let choiceIndexes = {
+            player: playerChoiceIndex,
+            computer: compChoiceIndex
+        }
         this.props.userChoice(gameData);
-        //this.gameSummary();
+        this.gameSummary(choiceIndexes);
+        this.scoreUpdate(gameResult);
     }
 
-    gameSummary = () => {
-        console.log("made it here");
-        let compChoiceIndex = this.choices.indexOf(this.props.compChoice);
-        console.log(compChoiceIndex);//returning a -1
-        let playerChoiceIndex = this.choices.indexOf(this.props.choice);
-        let summaryMessage = this.summaryArray[playerChoiceIndex][compChoiceIndex];
+    gameSummary = (choiceIndexes) => {
+        let summaryMessage = this.summaryArray[choiceIndexes.player][choiceIndexes.computer];
         console.log(summaryMessage);
+        this.props.gameSummary(summaryMessage);
     }
 
     handleShow = ()=>{
@@ -58,15 +60,41 @@ export class Selection extends Component {
         this.props.instructionState({instructionsActive: false});
     }
 
+    scoreUpdate = (result) => {
+        switch (result) {
+            case 'Win':
+                return this.props.youWin()
+            case 'Lose':
+                return this.props.youLose()
+            case 'Tie':
+                return this.props.youTie()
+            default:
+                return;
+        }
+
+    }
+
+
     render() {
         return (
             <div>
                 <h1>{this.state.title}</h1>
+
                 <div>
-                    {this.props.instructionsActive ? <div><h2>Instructions</h2> <Instructions /></div> : <h2>Instructions</h2> }
-                        <button onClick={this.handleShow}>Show</button>
-                        <button onClick={this.handleHide}>Hide</button>
+                    {this.props.instructionsActive ? 
+                        <div>
+                            <h2>Instructions</h2> 
+                            <button onClick={this.handleHide}>Hide</button> 
+                            <Instructions />
+                        </div>
+                        : 
+                        <div>
+                            <h2>Instructions</h2>  
+                            <button onClick={this.handleShow}>Show</button> 
+                        </div>
+                    }  
                 </div>
+                
                 <h2>Choose wisely</h2>    
                 <button onClick={() => this.gameExecution("Rock")}>Rock</button>
                 <button onClick={() => this.gameExecution("Paper")}>Paper</button>
@@ -93,13 +121,21 @@ const mapDispatchToProps = (dispatch) => {
         userChoice: (choice) => {
             return dispatch ({type: 'USER_CHOICE', payload: choice})
         },
-        gameTime: (gameData) => {
-            return dispatch ({type: 'EXECUTE_GAME', payload: gameData})
+        gameSummary: (message) => {
+            return dispatch ({type: 'EXECUTE_GAME', payload: message})
         },
         instructionState: (stateChange) => {
             return dispatch ({type: 'INSTRUCTIONS', payload: stateChange})
+        },
+        youWin: () => {
+            return dispatch ({type: 'YOU_WIN'})
+        },
+        youLose: () => {
+            return dispatch ({type: 'YOU_LOSE'})
+        },
+        youTie: () => {
+            return dispatch ({type: 'YOU_TIE'})
         }
-
     }
 }
 

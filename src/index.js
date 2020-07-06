@@ -16,10 +16,12 @@ const initialState = {
   choice: '',
   compChoice: '',
   gameResults: '',
+  gameMessage: '',
   showMyComponent: false,
   showSomeOtherComponent: false,
   userScore: 0,
   compScore: 0,
+  tieGame: 0,
   instructionsActive: false
 }
 //if state is undefined, initialState will be used
@@ -36,13 +38,27 @@ const reducer = (state = initialState, action) => {
     case 'EXECUTE_GAME':
       return {
         ...state,
-        compChoice: payload.compChoiceText, //action.payload.compChoiceText???
-        gameResults: payload.gameResults
+        gameMessage: payload
       }
     case 'INSTRUCTIONS':
       return {
         ...state,
         instructionsActive: payload.instructionsActive
+      }
+    case 'YOU_WIN':
+      return {
+        ...state,
+        userScore: state.userScore + 1
+      }
+    case 'YOU_LOSE':
+      return {
+        ...state,
+        compScore: state.compScore + 1
+      }
+    case 'YOU_TIE':
+      return {
+        ...state,
+        tieGame: state.tieGame + 1
       }
     default:
       return state;
