@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 
-
 export class Instructions extends Component {
 
     render() {
         return (
             <div>
                 
-                <p>Rock, Paper, Scissors, but now with Lizard and Spock</p>
+                <p><i>Rock, Paper, Scissors, but now with Lizard and Spock</i></p>
                 <ul>
                     <li>rock crushes lizard</li>
                     <li>rock crushes scissors</li>

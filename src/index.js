@@ -7,18 +7,17 @@ import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Scoreboard from './components/Scoreboard';
+import Title from './components/Title';
 //import { BrowserRouter as Router} from 'react-router-dom';
 
 // store setup
 
 const initialState = {
-  name: 'Lance',
+  name: 'Lance',//build out component to ask user name
   choice: '',
   compChoice: '',
   gameResults: '',
   gameMessage: '',
-  showMyComponent: false,
-  showSomeOtherComponent: false,
   userScore: 0,
   compScore: 0,
   tieGame: 0,
@@ -72,6 +71,7 @@ const store = createStore(reducer);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+        <Title />
         <Selection />
         <Game />
         <Scoreboard />

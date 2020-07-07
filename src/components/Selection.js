@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Instructions from './Instructions';
+import './component.css';
 
 export class Selection extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            title: "Rock, Paper, Scissors, Lizard, Spock Game"
-        };
         this.choices = ["Rock", "Paper", "Scissors", "Lizard", "Spock"];
         this.resultArray = [
             ['Tie','Lose','Win','Win','Lose'],
@@ -48,7 +46,6 @@ export class Selection extends Component {
 
     gameSummary = (choiceIndexes) => {
         let summaryMessage = this.summaryArray[choiceIndexes.player][choiceIndexes.computer];
-        console.log(summaryMessage);
         this.props.gameSummary(summaryMessage);
     }
 
@@ -74,28 +71,26 @@ export class Selection extends Component {
 
     }
 
-
+    //The below renders the instruction using a ternary operator.  Then renders the buttons for user selection. 
     render() {
         return (
             <div>
-                <h1>{this.state.title}</h1>
-
                 <div>
                     {this.props.instructionsActive ? 
                         <div>
-                            <h2>Instructions</h2> 
+                            <h2 className="subtitle">INSTRUCTIONS</h2> 
                             <button onClick={this.handleHide}>Hide</button> 
                             <Instructions />
                         </div>
                         : 
                         <div>
-                            <h2>Instructions</h2>  
+                            <h2 className="subtitle">INSTRUCTIONS</h2>  
                             <button onClick={this.handleShow}>Show</button> 
                         </div>
                     }  
                 </div>
                 
-                <h2>Choose wisely</h2>    
+                <h2 className="subtitle">CHOOSE WISELY</h2>    
                 <button onClick={() => this.gameExecution("Rock")}>Rock</button>
                 <button onClick={() => this.gameExecution("Paper")}>Paper</button>
                 <button onClick={() => this.gameExecution("Scissors")}>Scissors</button>
@@ -107,15 +102,14 @@ export class Selection extends Component {
 
 }
 
-//this is what maps the redux state to the Selection component as props you can use
+//Maps redux state to this components properties
 function mapStateToProps(state) {
     return {
-        //choice: state.choice
         ...state
     }
 }
 
-
+//maps these dispatches to this components properties so actions can be sent to the reducer?
 const mapDispatchToProps = (dispatch) => {
     return {
         userChoice: (choice) => {
@@ -139,4 +133,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+//connect function from react-redux, used to map state and dispatch to this components properties
 export default connect(mapStateToProps, mapDispatchToProps)(Selection);
