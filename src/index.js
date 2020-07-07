@@ -8,6 +8,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import Scoreboard from './components/Scoreboard';
 import Title from './components/Title';
+import Footer from './components/Footer';
 //import { BrowserRouter as Router} from 'react-router-dom';
 
 // store setup
@@ -21,7 +22,8 @@ const initialState = {
   userScore: 0,
   compScore: 0,
   tieGame: 0,
-  instructionsActive: false
+  instructionsActive: false,
+  showResults: false
 }
 //if state is undefined, initialState will be used
 const reducer = (state = initialState, action) => {
@@ -75,7 +77,7 @@ ReactDOM.render(
         <Selection />
         <Game />
         <Scoreboard />
-        
+        <Footer />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -79,19 +79,19 @@ export class Selection extends Component {
                     {this.props.instructionsActive ? 
                         <div>
                             <h2 className="subtitle">INSTRUCTIONS</h2> 
-                            <button onClick={this.handleHide}>Hide</button> 
+                            <button className="body" onClick={this.handleHide}>Hide</button> 
                             <Instructions />
                         </div>
                         : 
                         <div>
                             <h2 className="subtitle">INSTRUCTIONS</h2>  
-                            <button onClick={this.handleShow}>Show</button> 
+                            <button className="body" onClick={this.handleShow}>Show</button> 
                         </div>
                     }  
                 </div>
                 
                 <h2 className="subtitle">CHOOSE WISELY</h2>    
-                <button onClick={() => this.gameExecution("Rock")}>Rock</button>
+                <button className="body" onClick={() => this.gameExecution("Rock")}>Rock</button>
                 <button onClick={() => this.gameExecution("Paper")}>Paper</button>
                 <button onClick={() => this.gameExecution("Scissors")}>Scissors</button>
                 <button onClick={() => this.gameExecution("Lizard")}>Lizard</button>

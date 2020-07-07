@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 
 export class Instructions extends Component {
 
+    componentDidMount() {
+        console.log("Instructions component mounted, baby");
+    }
+
     render() {
         return (
-            <div>
+            <div className="body">
                 
                 <p><i>Rock, Paper, Scissors, but now with Lizard and Spock</i></p>
                 <ul>

@@ -8,7 +8,7 @@ export class Scoreboard extends Component {
         return (
             <div>
                 <h2 className="subtitle">SCOREBOARD</h2>
-                <p>Player: {this.props.userScore}  |  Computer: {this.props.compScore}  |  Tie: {this.props.tieGame}</p>
+                <p className="body">Player: {this.props.userScore}  |  Computer: {this.props.compScore}  |  Tie: {this.props.tieGame}</p>
             </div>
         )
     }

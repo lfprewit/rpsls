@@ -9,11 +9,12 @@ export class Game extends Component {
             
             <div>
                 <h2 className="subtitle">GAME RESULTS</h2>
-                <p>You chose {this.props.choice}.</p>
-                <p>Your opponent chose {this.props.compChoice}.</p>
-                <p><b>{this.props.gameMessage}</b></p>
-                <p><b><i>You {this.props.gameResults}</i></b></p>
-                
+                <div className="body">
+                    <p>You chose {this.props.choice}.</p>
+                    <p>Your opponent chose {this.props.compChoice}.</p>
+                    <p><b>{this.props.gameMessage}</b></p>
+                    <h3><b><i>You {this.props.gameResults}</i></b></h3>
+                </div>
             </div>
         )
     } 
