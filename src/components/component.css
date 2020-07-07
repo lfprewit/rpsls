@@ -1,0 +1,21 @@
+.title {
+    font-family: impact, sans-serif;
+    text-align: center;
+}
+
+.subtitle {
+    font-family: impact, sans-serif;
+    margin-left: 10%;
+}
+
+.body {
+    margin-left: 15%;
+
+}
+
+.footer {
+    margin-left: 45%;
+    position : absolute;
+    bottom : 0;
+    height : 40px;
+}

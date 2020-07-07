@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-
-
-
-
+import './component.css';
 
 export class Game extends Component {
-
-
-
+   
     render() {
         return (
             
             <div>
-                <h2>Results</h2>
-                <h3>You chose {this.props.choice}</h3>
-                <h3>Your opponent chose {this.props.compChoice}</h3>
-                <h3>You {this.props.gameResults}</h3>
-
-                
+                <h2 className="subtitle">GAME RESULTS</h2>
+                <div className="body">
+                    <p>You chose {this.props.choice}.</p>
+                    <p>Your opponent chose {this.props.compChoice}.</p>
+                    <p><b>{this.props.gameMessage}</b></p>
+                    <h3><b><i>You {this.props.gameResults}</i></b></h3>
+                </div>
             </div>
         )
-    }
+    } 
 }
-
 
 const mapStateToProps = (state) => {
     return {
@@ -32,12 +26,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        gameTime: (gameData) => {
-            return dispatch ({type: 'EXECUTE_GAME', payload: gameData});
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps)(Game);
